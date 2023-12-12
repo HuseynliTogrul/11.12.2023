@@ -89,10 +89,10 @@ const athletes = [
     totalMedals: 6,
     country: "South Korea",
   },
-];
+]
 
 
-// 1. Dünya rekordu olan atletlərdən ibarət array yaratmaq.
+// // 1. Dünya rekordu olan atletlərdən ibarət array yaratmaq.
 
 const athleteHasWorldRecord = athletes.filter((a, i, arr) => {
   return a.hasWorldRecord;
@@ -102,17 +102,17 @@ console.log("1. Dünya rekordu olan atletlərdən ibarət array yaratmaq.")
 console.log(athleteHasWorldRecord);
 
 
-// 2. Medallarının sayı 10 və daha artıq olan qadın atletlərdən ibarət array yaratmaq.
+// // 2. Medallarının sayı 10 və daha artıq olan qadın atletlərdən ibarət array yaratmaq.
 
 const CountFemaleAthleteMedal = athletes.filter((a, i, arr) => {
-  return a.totalMedals > 10 & a.gender == "Female";
+  return a.totalMedals >= 10 & a.gender === "Female";
 });
 
 console.log("2. Medallarının sayı 10 və daha artıq olan qadın atletlərdən ibarət array yaratmaq.")
 console.log(CountFemaleAthleteMedal);
 
 
-// 3. Atletlərin adlarından ibarət array yaratmaq.
+// // 3. Atletlərin adlarından ibarət array yaratmaq.
 
 const findAthletesName = athletes.map((a, i, arr) => {
   return a.name;
@@ -122,7 +122,7 @@ console.log("3. Atletlərin adlarından ibarət array yaratmaq.")
 console.log(findAthletesName);
 
 
-// 4. Atletlərin adları və ölkələri olan obyektlərdən ibarət array yaratmaq.
+// // 4. Atletlərin adları və ölkələri olan obyektlərdən ibarət array yaratmaq.
 
 const showAthletesCountry = athletes.map((a) => {
   return {
@@ -135,7 +135,7 @@ console.log("4. Atletlərin adları və ölkələri olan obyektlərdən ibarət 
 console.log(showAthletesCountry);
 
 
-// 5. Bütün atletlərin ümumi medallarının sayını hesablamaq.
+// // 5. Bütün atletlərin ümumi medallarının sayını hesablamaq.
 
 newTotalMedals = 0;
 
@@ -147,7 +147,7 @@ console.log("5. Bütün atletlərin ümumi medallarının sayını hesablamaq.")
 console.log(newTotalMedals);
 
 
-// 6. Atletlərin medallarının sayının artım sırasına görə sıralanmış array yaratmaq.
+// // 6. Atletlərin medallarının sayının artım sırasına görə sıralanmış array yaratmaq.
 
 const sortAthletesMedal = athletes.sort((a, b) => {
   return a.totalMedals - b.totalMedals;
@@ -157,71 +157,53 @@ console.log("6. Atletlərin medallarının sayının artım sırasına görə s�
 console.log(sortAthletesMedal);
 
 
-// 7. Atletlərin adlarının əlifba sırası ilə sıralanmış array yaratmaq.
+// // 7. Atletlərin adlarının əlifba sırası ilə sıralanmış array yaratmaq.
 
-const sortedAthletesName = athletes.slice().sort((a, b) => {
-  return a.name.localeCompare(b.name);
-});
+const sortAthletesName = findAthletesName.sort();
 
 console.log("7. Atletlərin adlarının əlifba sırası ilə sıralanmış array yaratmaq.")
-console.log(sortedAthletesName);
+console.log(sortAthletesName)
 
 
-// 8. Atletin adına əsasən spesifik obyekti tapıb console-a yazmaq.
+// // 8. Atletin adına əsasən spesifik obyekti tapıb console-a yazmaq.
+
+const foundAthlete = athletes.filter((a, i, arr) => {
+  return a.name === "Usain Bolt";
+})[0];
 
 console.log("8. Atletin adına əsasən spesifik obyekti tapıb console-a yazmaq.")
-
-function findAthleteByName(athletes, name) {
-  const foundAthlete = athletes.find((athlete) => athlete.name === name);
-  return foundAthlete;
-}
-const specificAthlete = findAthleteByName(athletes, "Usain Bolt");
-
-if (specificAthlete) {
-  console.log("Spesifik atletin məlumatları:", specificAthlete);
-} else {
-  console.log("Belə bir atlet tapılmadı.");
-}
+console.log(foundAthlete)
 
 
-// 9. Hər hansı bir kişi atletin dünya rekordu olub olmamasını yoxlamaq.
+// // 9. Hər hansı bir kişi atletin dünya rekordu olub olmamasını yoxlamaq.
 
 const hasAthleteWorldRecord = athletes.some((a, i, arr) => {
-  if (a.gender = "Male") {
-    return a.hasWorldRecord;
-  }
+  return a.gender === "Male" && a.hasWorldRecord === true;
 });
 
 console.log("9. Hər hansı bir kişi atletin dünya rekordu olub olmamasını yoxlamaq.")
 console.log(hasAthleteWorldRecord);
 
-// 10. Amerikalı və dünya rekordu olan atletlərin adlarından ibarət array yaratmaq.
+// // 10. Amerikalı və dünya rekordu olan atletlərin adlarından ibarət array yaratmaq.
 
 const hasWorldRecordAmerican = athletes.filter((a, i, arr) => {
-  if (a.country = "United States") {
-    if (a.hasWorldRecord) {
-      return a.name;
-    }
-  }
+  return a.country === "United States" && a.hasWorldRecord === true;
+});
+
+const hasWorldRecordAmericanNames = hasWorldRecordAmerican.map((a, i, arr) => {
+  return a.name;
 });
 
 console.log("10. Amerikalı və dünya rekordu olan atletlərin adlarından ibarət array yaratmaq.")
-console.log(hasWorldRecordAmerican);
+console.log(hasWorldRecordAmericanNames);
 
 
-// 11. Kişi atletlərin yaşlarının ortalamasını tapmaq.
+// // 11. Kişi atletlərin yaşlarının ortalamasını tapmaq.
 
-function averageMaleAthletes(athletes) {
-
-  const maleAthletes = athletes.filter((athlete) => athlete.gender === "Male");
-
-  const totalAge = maleAthletes.reduce((sum, athlete) => sum + athlete.age, 0);
-
-  const averageAgeForMaleAthletes = totalAge / maleAthletes.length;
-
-  return averageAgeForMaleAthletes;
-}
-const averageAgeForMaleAthletes = averageMaleAthletes(athletes);
+const maleAthletes = athletes.filter((a, i, arr) => a.gender === "Male");
+console.log(maleAthletes.length);
+const totalAge = maleAthletes.reduce((sum, a) => sum + a.age, 0);
+const averageAgeForMaleAthletes = totalAge / maleAthletes.length;
 
 console.log("11. Kişi atletlərin yaşlarının ortalamasını tapmaq.")
 console.log(averageAgeForMaleAthletes);
